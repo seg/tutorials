@@ -14,4 +14,5 @@ These are IPython Notebooks. They can be opened and read in their raw format, or
 - [IPython notebook to run the Euler deconvolution](http://nbviewer.ipython.org/github/seg/tutorials/blob/master/1404_Euler_deconvolution/euler-deconvolution-examples.ipynb)
 
 ## June 2014 (in progress)
-- [IPython Notebook](http://nbviewer.org/github/seg/tutorials/blob/master/1406_Make_a_synthetic/how_to_make_synthetic.ipynb), by Evan Bianco
+- [Well-tie calculus](http://library.seg.org/doi/abs/10.1190/tle33060674.1), by Evan Bianco
+- [IPython Notebook](http://nbviewer.org/github/seg/tutorials/blob/master/1406_Make_a_synthetic/how_to_make_synthetic.ipynb)
