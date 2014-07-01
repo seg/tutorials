@@ -1,6 +1,9 @@
-This project is part of a Leading Edge tutorial by Evan Bianco. 
+**This project is part of a Leading Edge tutorial by Evan Bianco.** 
+
+[See a rendered version of this Notebook.](http://nbviewer.org/github/seg/tutorials/blob/master/1406_Make_a_synthetic/how_to_make_synthetic.ipynb)
 
 A note about the data
+====================
 
 The LAS file was digitized by Neil Watson of Atlantic Petrohysics, Halifax, Nova Scotia. The data is shared to the community for knowledge sharing and with an understanding that it will not be used for any commercial purposes.
 
