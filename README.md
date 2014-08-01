@@ -16,3 +16,8 @@ These are IPython Notebooks. They can be opened and read in their raw format, or
 ## June 2014
 - [Well-tie calculus](http://library.seg.org/doi/abs/10.1190/tle33060674.1), by Evan Bianco
 - [IPython Notebook](http://nbviewer.org/github/seg/tutorials/blob/master/1406_Make_a_synthetic/how_to_make_synthetic.ipynb)
+
+## August 2014
+- [Evaluate and compare colormaps](), by Matteo Niccoli
+- [IPython Notebook](https://github.com/mycarta/tutorials/blob/master/1408_Evaluate_and_compare_colormaps/How_to_evaluate_and_compare_colormaps.ipynb)
+
