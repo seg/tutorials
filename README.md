@@ -19,5 +19,5 @@ These are IPython Notebooks. They can be opened and read in their raw format, or
 
 ## August 2014
 - [Evaluate and compare colormaps](), by Matteo Niccoli
-- [IPython Notebook](https://github.com/mycarta/tutorials/blob/master/1408_Evaluate_and_compare_colormaps/How_to_evaluate_and_compare_colormaps.ipynb)
+- [IPython Notebook](http://nbviewer.ipython.org/github/mycarta/tutorials/blob/master/1408_Evaluate_and_compare_colormaps/How_to_evaluate_and_compare_colormaps.ipynb)
 
