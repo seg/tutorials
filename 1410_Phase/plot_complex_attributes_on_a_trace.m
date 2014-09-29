@@ -1,6 +1,6 @@
 % Load a seismic trace
 % This is trace was exported from OpenDTect as a Simple File
-[s, t] = load_simple_trace('data/penobscot_trace_il1190_xl1155.trace');
+[s, t] = load_simple_trace('data/trace_il1190_xl1155.trace');
 
 % Compute the Analytic (Complex) Trace
 z = s + i*ffthilbert(s);
