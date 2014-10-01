@@ -16,6 +16,7 @@ Running the Tutorial Code
 -------------------------
 Open octave from the command line or start menu shortcut then carry out the following steps on the octave command prompt.
  1. cd into the tutorials directory e.g. cd home\seg\tutorials\1410_Phase
+ 1. then run the following scripts inside Octave (tip: use 'tab' to autocomplete long names)
  1. configure_tutorial
  1. [plot_complex_attributes_on_a_trace](plot_complex_attributes_on_a_trace.m) - to produce figure 1 from the tutorial. This uses fftshifter.m to compute the hilbert transform, and subsequently envelope and phase.
  1. [plot_complex_attributes_on_a_slice](plot_complex_attributes_on_a_slice.m) - will repeat the trace based computation for each trace within a the section of data. SegyMAT is used to load the seismic section from the .sgy file included in the data folder, and we simply loop over the traces in the resulting 2d array.
@@ -27,6 +28,8 @@ Conclusions from working with Octave
 Octave provides an alternative environment to the commercial Matlab package. The degree of similarity and compatibility is good, certainly for ore functions. However, there are limitations in Octave that make working with it challenging, the most significant being the lack of precompiled 64 bit builds, which limits the amount of data that we can load and process to 2GB. In this tutorial, we've worked with traces and seismic sections that in this case easily fit within that limit. 
 
 However, if you want to work with 3D data or generate maps over hilbert transformed data, then you'll need to put significant effort into managing memory and its likely your processing will be unnecessarily slow as a result, makign withing with 3D in Octave prohibitive.
+
+Note on Plotting: Octave doesn't always autoscale the contents of its figure windows. Sometimes to get nice large/clear plots, you'll need to plot, resize the window and then plot again.
 
 References
 ----------

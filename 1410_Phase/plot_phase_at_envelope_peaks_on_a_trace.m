@@ -16,7 +16,7 @@ phase_differences = abs(idealised_phase - phase_at_envelope_peaks);
 % plot
 plot_range = 500:750;
 tshort = t(plot_range);
-h = figure(1);
+h = figure(4);
 clf
 subplot(2,1,1)
 plot(tshort, real(z(plot_range)),'k')

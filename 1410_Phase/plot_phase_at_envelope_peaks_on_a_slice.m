@@ -14,7 +14,7 @@ for n = 1:sz(2)
 	idealised_phase(:,n) = get_idealised_phase(envelope_peaks(:,n), phase(:,n));
 end
 
-figure(4)
+figure(5)
 imagesc(fliplr(phase_at_envelope_peaks(500:750,:)))
 colormap(hsv(256))
 colorbar
@@ -24,7 +24,7 @@ set(gca,'FontSize',axes_font_size)
 title('Phase at Envelope Peaks', 'FontSize', title_font_size)
 
 
-figure(5)
+figure(6)
 phase_error = abs(idealised_phase - phase_at_envelope_peaks);
 phase_error(:,190) = 1.5;
 imagesc(fliplr(phase_error(500:750, :)))
