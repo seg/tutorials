@@ -12,6 +12,10 @@ To install GNU octave,
  - on Linux or MAC follow the instructions for your operating system on the [Octave website](http://www.gnu.org/software/octave/download.html) to get the appropriate packages. NOTE: some Linux distributions come with octave pre-installed.
  - on Windows download the latest binary installers distribution from [Octave Forge](http://sourceforge.net/projects/octave/files/Octave%20Windows%20binaries/)
 
+Octave Basics
+-------------
+If you are familar with Matlab, you already know (mostly) how to use Octave. Otherwise get started with this [cheatsheet](http://ais.informatik.uni-freiburg.de/teaching/ss13/robotics/exercises/cheatsheet.pdf) or dive in with [this one](http://folk.ntnu.no/joern/itgk/refcard-a4.pdf).
+
 Running the Tutorial Code
 -------------------------
 Open octave from the command line or start menu shortcut then carry out the following steps on the octave command prompt.
