@@ -4,7 +4,7 @@ The code for this tutorial has been developed in GNU Octave a high level program
 
 Expanded Tutorial Paper
 -----------------------
-A pdf of the expanded tutorial paper is [here](Purves_Tutorial_Long.pdf) this includes plots of seismis attributes on sections are well as the trace plots included in the TLE tutorial.
+A pdf of the expanded tutorial paper is [here](purves_tutorial_long.pdf) this includes plots of seismis attributes on sections are well as the trace plots included in the TLE tutorial.
 
 Installation
 ------------
