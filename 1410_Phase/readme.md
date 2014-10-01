@@ -4,7 +4,7 @@ The code for this tutorial has been developed in GNU Octave a high level program
 
 Expanded Tutorial Paper
 -----------------------
-A pdf of the expanded tutorial paper is [here]() this includes plots of seismis attributes on sections are well as the trace plots included in the TLE tutorial.
+A pdf of the expanded tutorial paper is [here](Purves_Tutorial_Long.pdf) this includes plots of seismis attributes on sections are well as the trace plots included in the TLE tutorial.
 
 Installation
 ------------
@@ -17,10 +17,10 @@ Running the Tutorial Code
 Open octave from the command line or start menu shortcut then carry out the following steps on the octave command prompt.
  1. cd into the tutorials directory e.g. cd home\seg\tutorials\1410_Phase
  1. configure_tutorial
- 1. [plot_complex_attributes_on_a_trace](1410_Phase/plot_complex_attributes_on_a_trace.m) - to produce figure 1 from the tutorial. This uses fftshifter.m to compute the hilbert transform, and subsequently envelope and phase.
- 1. [plot_complex_attributes_on_a_slice](1410_Phase/plot_complex_attributes_on_a_slice.m) - will repeat the trace based computation for each trace within a the section of data. SegyMAT is used to load the seismic section from the .sgy file included in the data folder, and we simply loop over the traces in the resulting 2d array.
- 1. [plot_phase_at_envelope_peaks_on_a_trace](1410_Phase/plot_phase_at_envelope_peaks_on_a_trace.m) - will produce figure 2 from the tutorial. This repeats the envelope and phase computation and then detects peaks in the envelope function. Envelope and phase are extracted at those locations. Phase values are then plotted against an computed "idealised phase".
- 1. [plot_phase_at_envelope_peaks_on_a_section](1410_Phase/plot_phase_at_envelope_peaks_on_a_slice.m) - applies the same algorithm from the last step to each trace in a section, creating new sparse envelope and phase sections. Note these could also be computed over all traces in a cube, however soem limiations of octave prevent us from doing so here.
+ 1. [plot_complex_attributes_on_a_trace](plot_complex_attributes_on_a_trace.m) - to produce figure 1 from the tutorial. This uses fftshifter.m to compute the hilbert transform, and subsequently envelope and phase.
+ 1. [plot_complex_attributes_on_a_slice](plot_complex_attributes_on_a_slice.m) - will repeat the trace based computation for each trace within a the section of data. SegyMAT is used to load the seismic section from the .sgy file included in the data folder, and we simply loop over the traces in the resulting 2d array.
+ 1. [plot_phase_at_envelope_peaks_on_a_trace](plot_phase_at_envelope_peaks_on_a_trace.m) - will produce figure 2 from the tutorial. This repeats the envelope and phase computation and then detects peaks in the envelope function. Envelope and phase are extracted at those locations. Phase values are then plotted against an computed "idealised phase".
+ 1. [plot_phase_at_envelope_peaks_on_a_section](plot_phase_at_envelope_peaks_on_a_slice.m) - applies the same algorithm from the last step to each trace in a section, creating new sparse envelope and phase sections. Note these could also be computed over all traces in a cube, however soem limiations of octave prevent us from doing so here.
 
 Conclusions from working with Octave
 ------------------------------------
