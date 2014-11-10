@@ -426,7 +426,7 @@ fig.set_facecolor('white')
 
 #   Plot log curves in two-way time
 ax0a = fig.add_subplot(261)
-l_vp_dig, = ax0a.plot(vp_dig/1000, t)
+l_vp_dig, = ax0a.plot(vp_dig/1000, t, 'k', lw=2)
 ax0a.set_ylim((min_plot_time,max_plot_time))
 ax0a.set_xlim(1.5, 4.0)
 ax0a.invert_yaxis()
@@ -434,10 +434,12 @@ ax0a.set_ylabel('TWT (sec)')
 ax0a.xaxis.tick_top()
 ax0a.xaxis.set_label_position('top')
 ax0a.set_xlabel('Vp (km/s)')
+ax0a.axhline(lyr_times[0,0], color='blue', lw=2, alpha=0.5)
+ax0a.axhline(lyr_times[0,1], color='red', lw=2, alpha=0.5)
 ax0a.grid()
 
 ax0b = fig.add_subplot(262)
-l_vs_dig, = ax0b.plot(vs_dig/1000, t)
+l_vs_dig, = ax0b.plot(vs_dig/1000, t, 'k', lw=2)
 ax0b.set_ylim((min_plot_time,max_plot_time))
 ax0b.set_xlim((0.8, 2.0))
 ax0b.invert_yaxis()
@@ -445,10 +447,12 @@ ax0b.xaxis.tick_top()
 ax0b.xaxis.set_label_position('top')
 ax0b.set_xlabel('Vs (km/s)')
 ax0b.set_yticklabels('')
+ax0b.axhline(lyr_times[0,0], color='blue', lw=2, alpha=0.5)
+ax0b.axhline(lyr_times[0,1], color='red', lw=2, alpha=0.5)
 ax0b.grid()
 
 ax0c = fig.add_subplot(263)
-l_rho_dig, = ax0c.plot(rho_dig, t)
+l_rho_dig, = ax0c.plot(rho_dig, t, 'k', lw=2)
 ax0c.set_ylim((min_plot_time,max_plot_time))
 ax0c.set_xlim((1.6, 2.6))
 ax0c.invert_yaxis()
@@ -456,19 +460,36 @@ ax0c.xaxis.tick_top()
 ax0c.xaxis.set_label_position('top')
 ax0c.set_xlabel('Den')
 ax0c.set_yticklabels('')
+ax0c.axhline(lyr_times[0,0], color='blue', lw=2, alpha=0.5)
+ax0c.axhline(lyr_times[0,1], color='red', lw=2, alpha=0.5)
 ax0c.grid()
 
+plt.text(2.55,
+        min_plot_time + (lyr_times[0,0] - min_plot_time)/2.,
+        'Layer 1',
+        fontsize=14,
+        horizontalalignment='right')
+plt.text(2.55,
+        lyr_times[0,1] + (lyr_times[0,0] - lyr_times[0,1])/2. + 0.002,
+        'Layer 2',
+        fontsize=14,
+        horizontalalignment='right')
+plt.text(2.55,
+        lyr_times[0,0] + (max_plot_time - lyr_times[0,0])/2.,
+        'Layer 3',
+        fontsize=14,
+        horizontalalignment='right')
 
 #   Plot synthetic gather and model top & base interfaces in two-way time
 ax1 = fig.add_subplot(222)
 plot_vawig(ax1, syn_zoep_pp, t, excursion)
 ax1.set_ylim((min_plot_time,max_plot_time))
-l_int1, = ax1.plot(lyr_times[:,0], color='red')
-l_int2, = ax1.plot(lyr_times[:,1], color='blue')
+l_int1, = ax1.plot(lyr_times[:,0], color='blue', lw=2)
+l_int2, = ax1.plot(lyr_times[:,1], color='red', lw=2)
 
 plt.legend([l_int1,l_int2], ['Interface 1', 'Interface 2'], loc=4)
 ax1.invert_yaxis()
-label_str = 'Synthetic Angle Gather\nLayer 2 Thickness = %4.1fm' % thickness
+label_str = 'Synthetic angle gather\nLayer 2 thickness = %4.1fm' % thickness
 ax1.set_xlabel(label_str, fontsize=14)
 ax1.set_ylabel('TWT (sec)')
 
@@ -476,24 +497,24 @@ ax1.set_ylabel('TWT (sec)')
 #   Plot Zoeppritz and convolved reflectivity curves    
 ax2 = fig.add_subplot(2,2,3)
 
-l_syn1, = ax2.plot(line1, color='red', linewidth=1)
-l_rc1, = ax2.plot( rc_zoep_pp[:,0], '--', color='red')
+l_syn1, = ax2.plot(line1, color='blue', linewidth=2)
+l_rc1, = ax2.plot( rc_zoep_pp[:,0], '--', color='blue', lw=2)
 
 ax2.set_xlim((-excursion, ntrc+excursion))
 ax2.grid()
-ax2.set_xlabel('Angle of Incidence (deg)')
-ax2.set_ylabel('Reflection Coefficient')
-ax2.set_title('Upper Interface Reflectivity')
+ax2.set_xlabel('Angle of incidence (deg)')
+ax2.set_ylabel('Reflection coefficient')
+ax2.set_title('Upper interface reflectivity')
 plt.legend([l_syn1, l_rc1], ['Convolved', 'Zoepprtiz'], loc=0)
 
 ax3 = fig.add_subplot(2,2,4)
-l_syn2, = ax3.plot(line2, color='blue', linewidth=1)
-l_rc2, = ax3.plot( rc_zoep_pp[:,1], '--', color='blue')
+l_syn2, = ax3.plot(line2, color='red', linewidth=2)
+l_rc2, = ax3.plot( rc_zoep_pp[:,1], '--', color='red', lw=2)
 ax3.set_xlim((-excursion, ntrc+excursion))
 ax3.grid()
-ax3.set_xlabel('Angle of Incidence (deg)')
-ax3.set_ylabel('Reflection Coefficient')
-ax3.set_title('Lower Interface Reflectivity')
+ax3.set_xlabel('Angle of incidence (deg)')
+ax3.set_ylabel('Reflection coefficient')
+ax3.set_title('Lower interface reflectivity')
 plt.legend([l_syn2, l_rc2], ['Convolved', 'Zoepprtiz'], loc=0)
 
 
