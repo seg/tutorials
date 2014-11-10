@@ -302,7 +302,7 @@ ax2.plot(syn_zo[:,lyr_indx[:,0]], color='blue')
 ax2.set_xlim((-excursion, ntrc+excursion))
 ax2.axvline(tuning_trace, color='k', lw=2)
 ax2.grid()
-ax2.set_title('Upper Interface Amplitude')
+ax2.set_title('Upper interface amplitude')
 ax2.set_xlabel('Thickness (m)')
 ax2.set_ylabel('Amplitude')
 plt.text(tuning_trace + 2,
