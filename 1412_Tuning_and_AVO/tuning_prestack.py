@@ -26,7 +26,7 @@ vp_mod = [2500.0, 2600.0, 2550.0]  # P-wave velocity (m/s)
 vs_mod = [1200.0, 1300.0, 1200.0]  # S-wave velocity (m/s)
 rho_mod= [1.95, 2.0, 1.98]         # Density (g/cc)
 
-thickness = 18.0  # vertical thickness of layer 2 in metres
+thickness = 17.0  # vertical thickness of layer 2 in metres
 
 #   Angle range for incident rays
 theta1_min = 0.0    # best to leave this set to zero
@@ -496,6 +496,9 @@ ax3.set_ylabel('Reflection Coefficient')
 ax3.set_title('Lower Interface Reflectivity')
 plt.legend([l_syn2, l_rc2], ['Convolved', 'Zoepprtiz'], loc=0)
 
+
+#   Save the plot
+plt.savefig('figure_2.png')
 
 #   Display the plot
 plt.show()

@@ -12,6 +12,7 @@ This script is provided without warranty of any kind.
 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import gridspec
 
 
 
@@ -55,7 +56,7 @@ excursion = 2
 #       FUNCTIONS DEFINITIONS
 #
 
-def plot_vawig(axhdl, data, t, excursion):
+def plot_vawig(axhdl, data, t, excursion, highlight=None):
 
     import numpy as np
     import matplotlib.pyplot as plt
@@ -72,7 +73,13 @@ def plot_vawig(axhdl, data, t, excursion):
         
         tbuf = np.hstack([i, tbuf, i])
             
-        axhdl.plot(tbuf, t, color='black', linewidth=0.5)
+        if i==highlight:
+            lw = 2
+        else:
+            lw = 0.5
+
+        axhdl.plot(tbuf, t, color='black', linewidth=lw)
+
         plt.fill_betweenx(t, tbuf, i, where=tbuf>i, facecolor=[0.6,0.6,1.0], linewidth=0)
         plt.fill_betweenx(t, tbuf, i, where=tbuf<i, facecolor=[1.0,0.7,0.7], linewidth=0)
     
@@ -244,33 +251,65 @@ t = np.array(t)
 lyr_times = np.array(lyr_times)
 lyr_indx = np.array(np.round(lyr_times/dt), dtype='int16')
 
+# Use the transpose because rows are traces;
+# columns are time samples.
+tuning_trace = np.argmax(np.abs(syn_zo.T)) % syn_zo.T.shape[1]
+tuning_thickness = tuning_trace * dz_step
 
 #   Plotting Code
+[ntrc, nsamp] = syn_zo.shape
 
-fig = plt.figure(figsize=(12, 12))
+fig = plt.figure(figsize=(12, 14))
 fig.set_facecolor('white')
-ax1 = fig.add_subplot(211)
 
-plot_vawig(ax1, syn_zo, t, excursion)
-ax1.plot(lyr_times[:,0], color='red')
-ax1.plot(lyr_times[:,1], color='blue')
+gs = gridspec.GridSpec(3, 1, height_ratios=[1, 1, 1])
+
+ax0 = fig.add_subplot(gs[0])
+ax0.plot(lyr_times[:,0], color='blue', lw=1.5)
+ax0.plot(lyr_times[:,1], color='red', lw=1.5)
+ax0.set_ylim((min_plot_time,max_plot_time))
+ax0.invert_yaxis()
+ax0.set_xlabel('Thickness (m)')
+ax0.set_ylabel('Time (s)')
+plt.text(2,
+        min_plot_time + (lyr_times[0,0] - min_plot_time)/2.,
+        'Layer 1',
+        fontsize=16)
+plt.text(dz_max/dz_step - 2,
+        lyr_times[-1,0] + (lyr_times[-1,1] - lyr_times[-1,0])/2.,
+        'Layer 2',
+        fontsize=16,
+        horizontalalignment='right')
+plt.text(2,
+        lyr_times[0,0] + (max_plot_time - lyr_times[0,0])/2.,
+        'Layer 3',
+        fontsize=16)
+plt.gca().xaxis.tick_top()
+plt.gca().xaxis.set_label_position('top')
+ax0.set_xlim((-excursion, ntrc+excursion))
+
+ax1 = fig.add_subplot(gs[1])
+plot_vawig(ax1, syn_zo, t, excursion, highlight=tuning_trace)
+ax1.plot(lyr_times[:,0], color='blue', lw=1.5)
+ax1.plot(lyr_times[:,1], color='red', lw=1.5)
 ax1.set_ylim((min_plot_time,max_plot_time))
 ax1.invert_yaxis()
-
 ax1.set_xlabel('Thickness (m)')
 ax1.set_ylabel('Time (s)')
 
-
-ax2 = fig.add_subplot(2,1,2)
-[ntrc, nsamp] = syn_zo.shape
-
-
-ax2.plot(syn_zo[:,lyr_indx[:,0]], color='red')
+ax2 = fig.add_subplot(gs[2])
+ax2.plot(syn_zo[:,lyr_indx[:,0]], color='blue')
 ax2.set_xlim((-excursion, ntrc+excursion))
+ax2.axvline(tuning_trace, color='k', lw=2)
 ax2.grid()
 ax2.set_title('Upper Interface Amplitude')
 ax2.set_xlabel('Thickness (m)')
 ax2.set_ylabel('Amplitude')
-plt.show()
+plt.text(tuning_trace + 2,
+        plt.ylim()[0] * 1.1,
+        'tuning thickness = {0} m'.format(str(tuning_thickness)),
+        fontsize=16)
 
+plt.savefig('figure_1.png')
+plt.show()
 
