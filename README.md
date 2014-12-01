@@ -26,7 +26,7 @@ These are IPython Notebooks. They can be opened and read in their raw format, or
 - [IPython Notebook](http://nbviewer.ipython.org/github/mycarta/tutorials/blob/master/1408_Evaluate_and_compare_colormaps/How_to_evaluate_and_compare_colormaps.ipynb)
 
 ## October 2014
-- [Phase and the Hilbert transform](http://www.tleonline.org/theleadingedge/october_2014?folio=1164#pg94), by Steve Purves &mdash; article in *TLE*
+- [Phase and the Hilbert transform](http://library.seg.org/doi/abs/10.1190/tle33101164.1), by Steve Purves &mdash; article in *TLE*
 - [A guide to running the tutorial with GNU Octave](1410_Phase/readme.md)
 - [A longer version of the tutorial paper](https://github.com/seg/tutorials/raw/master/1410_Phase/purves_tutorial_long.pdf)
 
