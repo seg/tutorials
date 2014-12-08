@@ -16,9 +16,8 @@ phase_differences = abs(idealised_phase - phase_at_envelope_peaks);
 % plot
 plot_range = 500:750;
 tshort = t(plot_range);
-h = figure(4);
+h = figure(7);
 clf
-subplot(2,1,1)
 plot(tshort, real(z(plot_range)),'k')
 hold on
 grid on
@@ -32,7 +31,7 @@ plot(tshort, -envelope(plot_range),'r')
 stem(tshort, -envelope_peaks(plot_range),'r');
 axis tight
 
-subplot(2,1,2)
+figure(8)
 phase_at_envelope_peaks(envelope_peaks == NaN) = NaN;
 stem(tshort, idealised_phase(plot_range), 'k');
 hold on
