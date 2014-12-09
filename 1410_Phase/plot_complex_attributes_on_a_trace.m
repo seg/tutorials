@@ -12,7 +12,6 @@ plot_range = 500:750; % select 1s window for plotting
 tshort = t(plot_range);
 h = figure(1)
 clf
-subplot(2,1,1)
 plot(tshort, real(z(plot_range)),'k');
 hold on;
 plot(tshort, imag(z(plot_range)),'k-.');
@@ -24,7 +23,7 @@ title('Trace Amplitudes', 'FontSize', title_font_size)
 xlabel('Time, t(ms)', 'FontSize', axes_font_size)
 set(legend('Original','Hilbert','Envelope','location','northeast'),'FontSize', axes_font_size)
 
-subplot(2,1,2)
+h = figure(2)
 plot(tshort, phase(plot_range),'k');
 axis tight
 set(gca,'FontSize',axes_font_size)

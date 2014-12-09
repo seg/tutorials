@@ -2,12 +2,13 @@ current_dir = pwd;
 addpath(current_dir);
 addpath([current_dir '/SegyMAT']);
 addpath([current_dir '/SegyMAT/GUI']);
-addpath([current_dir '/cm_and_cb_utilities']);
 disp('PATH updated');
 
 % other config
 pkg rebuild -noauto oct2mat
-graphics_toolkit('fltk');
+if (~isunix() && ~ismac())
+	graphics_toolkit('fltk');
+end
 warning('off', 'Octave:possible-matlab-short-circuit-operator');
 
 screensize = get(0,'screensize');

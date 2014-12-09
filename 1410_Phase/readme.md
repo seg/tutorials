@@ -11,10 +11,17 @@ Installation
 To install GNU octave, 
  - on Linux or MAC follow the instructions for your operating system on the [Octave website](http://www.gnu.org/software/octave/download.html) to get the appropriate packages. NOTE: some Linux distributions come with octave pre-installed.
  - on Windows download the latest binary installers distribution from [Octave Forge](http://sourceforge.net/projects/octave/files/Octave%20Windows%20binaries/)
+ - on MacOS_X follow this [guide](http://wiki.octave.org/Octave_for_MacOS_X)
 
 Octave Basics
 -------------
 If you are familar with Matlab, you already know (mostly) how to use Octave. Otherwise get started with this [cheatsheet](http://ais.informatik.uni-freiburg.de/teaching/ss13/robotics/exercises/cheatsheet.pdf) or dive in with [this one](http://folk.ntnu.no/joern/itgk/refcard-a4.pdf).
+
+Generating nice plots
+---------------------
+I have recently updated the code to plot each graph / image in its own figure window. Octave will open a new figure at its default size, often not great for the graph in question. However, you can now resize the figure window to a better size and aspect ratio and then hit 'e' to replot the graph.
+
+If you want to save the plots to image files, don't take screenshots instead use [print](http://wiki.octave.org/Octave_for_MacOS_X)
 
 Running the Tutorial Code
 -------------------------
