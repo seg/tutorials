@@ -34,3 +34,11 @@ These are IPython Notebooks. They can be opened and read in their raw format, or
 - Thin beds, tuning, and AVO, by Wes Hamlyn
 - [The scripts](https://github.com/seg/tutorials/raw/master/1412_Tuning_and_AVO)
 
+## February 2015
+
+## April 2015
+
+## June 2015
+
+## August 2015
+
