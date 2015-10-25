@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 import basic_methods
+from parent_directory import image_dir
 
 def main():
     fig, axes = setup_figure()
@@ -43,7 +44,7 @@ def main():
     axes[0, 3].set_title('Gersztenkorn & Marfurt (1999)\nEigenstructure')
     bottom_label(axes[1, 3], 'D')
 
-    fig.savefig('images/figure_2.png', dpi=200, bbox_inches='tight')
+    fig.savefig(image_dir('figure_2.png'), dpi=200, bbox_inches='tight')
 
 def generate_t(longer=False):
     t = np.linspace(0, 10*np.pi+2, 10)
@@ -180,5 +181,3 @@ def bottom_label(ax, label):
 if __name__ == '__main__':
     main()
     plt.show()
-
-

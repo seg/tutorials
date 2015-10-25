@@ -2,15 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import figure_2
+from parent_directory import image_dir
 
 def main():
     run(figure_2.semblance,
         'Semblance-Based\nMarfurt, et al (1998)',
-        'images/semblance_{}.png')
+        'semblance_{}.png')
 
     run(figure_2.eigenstructure,
         'Eigenstructure-Based\nGersztenkorn & Marfurt (1999)',
-        'images/eigenstructure_{}.png')
+        'eigenstructure_{}.png')
 
 def run(coherence_func, title, template):
     trace_funcs = [figure_2.identical_traces, figure_2.in_phase_traces,
@@ -20,7 +21,7 @@ def run(coherence_func, title, template):
     for trace_func, ylabel in zip(trace_funcs, ylabels):
         filename = template.format(ylabel.replace(' ', '_'))
         fig = compare(trace_func, figure_2.semblance, title, ylabel)
-        fig.savefig(filename, bbox_inches='tight', dpi=80)
+        fig.savefig(image_dir(filename), bbox_inches='tight', dpi=80)
 
 def compare(trace_func, coherence_func, title, ylabel):
     fig, axes = setup_subplots()

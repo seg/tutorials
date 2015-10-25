@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 
 import basic_methods
 from basic_methods import moving_window
-import data
+from parent_directory import data, image_dir
+
 
 def main():
     seismic = data.load_seismic()
@@ -20,7 +21,7 @@ def main():
     plot(axes[:,4], 'Dip Corrected', 'Eigenstructure-based',
          dip_corrected(seismic, (3, 3, 9), basic_methods.eig), 'E')
 
-    fig.savefig('images/figure_1.png', dpi=200, bbox_inches='tight')
+    fig.savefig(image_dir('figure_1.png'), dpi=200, bbox_inches='tight')
     plt.show()
 
 def dip_corrected(seismic, window, func):

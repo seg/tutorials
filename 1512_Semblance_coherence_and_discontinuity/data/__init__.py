@@ -19,3 +19,5 @@ def load_seismic():
 def load_horizon():
     """Read horizon as 2D array of z-indices into seismic cube."""
     return np.loadtxt(horizon_name)
+
+__all__ = ['load_seismic', 'load_horizon']
