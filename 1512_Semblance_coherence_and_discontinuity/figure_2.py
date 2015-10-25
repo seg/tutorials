@@ -89,12 +89,12 @@ def wiggles(ax, t, y1, y2):
     shift = y1.max() - y2.min() #+ 0.1 * y2.ptp()
     y2 = y2 + shift
 
-    ax.plot(y1, t, 'ro', zorder=4)
-    ax.plot(y2, t, 'ro', zorder=4)
+    ax.plot(y1, t, 'o', zorder=4, color='lightblue')
+    ax.plot(y2, t, 'o', zorder=4, color='lightblue')
 
-    t = scipy.ndimage.zoom(t, 10)
-    y1 = scipy.ndimage.zoom(y1, 10)
-    y2 = scipy.ndimage.zoom(y2, 10)
+    t = scipy.ndimage.zoom(t, 30)
+    y1 = scipy.ndimage.zoom(y1, 30)
+    y2 = scipy.ndimage.zoom(y2, 30)
 
     ax.fill_betweenx(t, y1, where=y1 > 0, facecolor='black')
     ax.plot(y1, t, color='black')
@@ -130,7 +130,7 @@ def cross_corr(ax, trace_func):
     xcorr /= (y1.std() * y2.std() * y2.size)
 
     ax.plot(xcorr, color='black')
-    ax.plot([xcorr.argmax()], [xcorr.max()], 'ro')
+    ax.plot([xcorr.argmax()], [xcorr.max()], 'o', color='red')
     ax.axhline(0, color='gray', zorder=0)
     ax.axvline(xcorr.size // 2, color='gray', zorder=0)
     label_coherence(ax, 'C={:0.1f}'.format(xcorr.max()))
@@ -138,7 +138,7 @@ def cross_corr(ax, trace_func):
     ax.margins(y=0.2)
 
 def setup_trace_xy(ax, t, y1, y2):
-    ax.plot(y1, y2, 'ro')
+    ax.plot(y1, y2, 'o', color='lightblue')
     ax.set(aspect=1, adjustable='datalim')
 
     divider = make_axes_locatable(ax)
@@ -154,12 +154,12 @@ def setup_trace_xy(ax, t, y1, y2):
 #    hax.set_xlabel('Trace 1 Amplitude')
 #    vax.set_ylabel('Trace 2 Amplitude')
 
-    vax.plot(t, y2, marker='o', color='black', mfc='red')
-    tt, y2 = scipy.ndimage.zoom(t, 10), scipy.ndimage.zoom(y2, 10)
+    vax.plot(t, y2, marker='o', color='black', mfc='lightblue')
+    tt, y2 = scipy.ndimage.zoom(t, 30), scipy.ndimage.zoom(y2, 30)
     vax.fill_between(tt, y2, where=y2 > 0, facecolor='black')
 
-    hax.plot(y1, t, marker='o', color='black', mfc='red')
-    tt, y1 = scipy.ndimage.zoom(t, 10), scipy.ndimage.zoom(y1, 10)
+    hax.plot(y1, t, marker='o', color='black', mfc='lightblue')
+    tt, y1 = scipy.ndimage.zoom(t, 30), scipy.ndimage.zoom(y1, 30)
     hax.fill_betweenx(tt, y1, where=y1 > 0, facecolor='black')
 
     hax.margins(0.05)
@@ -177,7 +177,8 @@ def bottom_label(ax, label):
                 textcoords='offset points',
                 ha='center', va='bottom', size=14)
 
-main()
-plt.show()
+if __name__ == '__main__':
+    main()
+    plt.show()
 
 
