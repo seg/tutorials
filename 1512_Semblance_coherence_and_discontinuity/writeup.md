@@ -105,7 +105,7 @@ function in future examples):
 
 ```
 def moving_window(data, func, window):
-    wrapped = lambda region: region.reshape(window)
+    wrapped = lambda region: func(region.reshape(window))
     return scipy.ndimage.generic_filter(data, wrapped, window)
 
 def marfurt_semblance(region):
