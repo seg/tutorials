@@ -99,3 +99,42 @@ def unflatten(data, surface, orig_shape):
         out[i, j, outmin:outmax] = data[i, j, inmin:inmax]
 
     return out
+
+def gradients(seismic, sigma):
+    """Builds a 4-d array of the gaussian gradient of *seismic*."""
+    grads = []
+    for axis in range(3):
+        # Gaussian filter with order=1 is a gaussian gradient operator
+        grad = scipy.ndimage.gaussian_filter1d(seismic, sigma, axis=axis, order=1)
+        grads.append(grad[..., np.newaxis])
+    return np.concatenate(grads, axis=3)
+
+def moving_window4d(grad, window, func):
+    """Applies the given function *func* over a moving *window*, reducing
+    the input *grad* array from 4D to 3D."""
+    # Pad in the spatial dimensions, but leave the gradient dimension unpadded.
+    half_window = [(x // 2, x // 2) for x in window] + [(0, 0)]
+    padded = np.pad(grad, half_window, mode='reflect')
+
+    out = np.empty(grad.shape[:3], dtype=float)
+    for i, j, k in np.ndindex(out.shape):
+        region = padded[i:i+window[0], j:j+window[1], k:k+window[2], :]
+        out[i,j,k] = func(region)
+    return out
+
+def gst_coherence_calc(region):
+    """Calculate gradient structure tensor coherence on a local region.
+    Intended to be applied with *moving_window4d*."""
+    region = region.reshape(-1, 3)
+    gst = region.T.dot(region) # This is the 3x3 gradient structure tensor
+
+    # Reverse sort of eigenvalues of the GST (largest first)
+    eigs = np.sort(np.linalg.eigvalsh(gst))[::-1]
+
+    return (eigs[0] - eigs[1]) / (eigs[0] + eigs[1])
+
+def gst_coherence(seismic, window, sigma=1):
+    """Randen, et al's (2000) Gradient Structure Tensor based coherence."""
+    # 4-d gradient array (ni x nj x nk x 3)
+    grad = gradients(seismic, sigma)
+    return moving_window4d(grad, window, gst_coherence_calc)

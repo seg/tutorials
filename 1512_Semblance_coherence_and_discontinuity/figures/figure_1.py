@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import basic_methods
-from basic_methods import moving_window
+from basic_methods import moving_window, gst_coherence
 from parent_directory import data, image_dir
 
 
@@ -18,8 +18,8 @@ def main():
          moving_window(seismic, (3,3,9), basic_methods.marfurt_semblance), 'C')
     plot(axes[:,3], 'Gersztenkorn and Marfurt (1999)', 'Eigenstructure-based',
          moving_window(seismic, (3,3,9), basic_methods.eig), 'D')
-    plot(axes[:,4], 'Dip Corrected', 'Eigenstructure-based',
-         dip_corrected(seismic, (3, 3, 9), basic_methods.eig), 'E')
+    plot(axes[:,4], 'Randen, et al, (2000)', 'Gradient Structure Tensor Based',
+         gst_coherence(seismic, (3, 3, 9), sigma=2), 'E')
 
     fig.savefig(image_dir('figure_1.png'), dpi=200, bbox_inches='tight')
     plt.show()

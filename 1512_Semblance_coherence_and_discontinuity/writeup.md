@@ -7,7 +7,7 @@ Abstract
 Coherence/discontinuity calculations are some of the most commonly used
 seismic attributes.  They measure the degree of similarity between adjacent
 seismic traces. However, there are several different algorithms to calculate
-a discontinuity estimate and many more terms used to refer to those algorithms. 
+a discontinuity estimate and many more terms used to refer to those algorithms.
 As a result, it is often difficult to understand the differences between
 various similar discontinuity attributes.  While the exact discontinuity
 algorithm that any particular proprietary software package uses may be unknown,
@@ -62,37 +62,14 @@ expands on these examples and gives runnable versions of these short snippets.
 Early Algorithms - Cross-correlation
 ----------------
 The earliest discontinuity algorithm was developed by Bahorich and Farmer
-(1995) and used the maximum cross correlation value of three traces.  Bahorich
-and Farmer coined the term "coherence" for the attribute, based on its
-conceptual similarity to pre-stack methods for estimating stacking velocities (e.g. Taner and Koehler, 1969).
-While this exact approach is computationally expensive and not widely used
-today, it provides a good starting point to understand later algorithms.
-
-In Bahorich and Farmer's (1995) method, each trace is correlated with a
-"moving-window" subset of two neighboring traces. We can demonstrate this with
-the python function shown below (Figure 1B):
-
-```
-def bahorich_coherence(data, zwin):
-    ni, nj, nk = data.shape
-    out = np.zeros_like(data)
-    padded = np.pad(data, ((0, 0), (0, 0), (zwin//2, zwin//2)), mode='reflect')
-
-    for i, j, k in np.ndindex(ni - 1, nj - 1, nk - 1):
-        center_trace = data[i,j,:]
-        center_std = center_trace.std()
-        x_trace = padded[i+1, j, k:k+zwin]
-        y_trace = padded[i, j+1, k:k+zwin]
-
-        xcor = np.correlate(center_trace, x_trace)
-        ycor = np.correlate(center_trace, y_trace)
-
-        px = xcor.max() / (xcor.size * center_std * x_trace.std())
-        py = ycor.max() / (ycor.size * center_std * y_trace.std())
-        out[i,j,k] = np.sqrt(px * py)
-
-    return out
-```
+(1995) and used the maximum cross correlation value of three traces.  Each
+trace is correlated with a "moving-window" subset of two neighboring traces
+(Figures 1B and 2B). A complete implementation is given in the accompanying
+notebook, but we'll skip it here for brevity. Bahorich and Farmer coined the
+term "coherence" for the attribute, based on its conceptual similarity to
+pre-stack methods for estimating stacking velocities (e.g. Taner and Koehler,
+1969).  While this exact approach is computationally expensive and not widely
+used today, it provides a good starting point to understand later algorithms.
 
 Generalization to an Arbitrary Number of Traces
 -----------------------------------------------
@@ -100,8 +77,7 @@ Bahorich and Farmer's (1995) approach was very successful, but it is
 sensitive to noise because only three traces are used. Marfurt, et al (1998)
 generalized Bahorich and Farmer's cross-correlation approach to an arbitrary
 number of input traces, referred to by the authors as "semblance-based
-coherence" (Figure 1C). As an example (Note: we'll reuse the ``moving_window``
-function in future examples):
+coherence" (Figure 1C). As an example:
 
 ```
 def moving_window(data, func, window):
@@ -159,27 +135,48 @@ cloud is fit by a plane.  To contrast with Marfurt, et al's (1998)
 method, for the case of two traces, this measures the scatter about the
 best-fit line instead of a line with a slope of 1, as shown in Figure 2D.
 
-Further Enhancements
---------------------
+Gradient Changes Instead of Trace Similarity
+--------------------------------------------
 
-A drawback to Marfurt, et al's (1998) and Gersztenkorn and Marfurt's (1999)
-approaches is that dipping reflectors will have a uniformly higher
-discontinuity (lower coherence/similarity) than non-dipping reflectors. In
-other words, these attributes don't distinguish between regional structural dip and
-localized discontinuities due to faulting, etc. Therefore, Marfurt
-(2006) proposed calculating and correcting for structural dip when performing
-discontinuity calculations.   While there are a number of different
-methods that can be used to both calculate and correct for structural dip (see
-Ch. 2 of Chopra and Marfurt (2007) for a review), dip calculations are beyond
-the scope of this tutorial.  Therefore, we'll approximate a dip correction by
-flattening on a pre-picked horizon in the interval of interest before applying
-a discontinuity calculation (Figure 1E).
+An entirely different approach than any we've discussed so far is to apply a
+structure tensor to seismic attributes. The structure tensor measures how the
+gradient of each dimension co-varies locally. Randen, et al (2000) were the
+first to propose this approach in their Gradient Structure Tensor (GST)
+attributes.  A number of useful attributes can be computed from the ratios of
+the eigenvalues of the structure tensor, one of which is a measure of how
+planar the data is locally, which we'll refer to as GST coherence (Randen, et
+al 2000).
 
-Furthermore, a number of other authors have proposed other discontinuity
-attributes which are not covered in this tutorial (See Ch. 3 of Chopra and
-Marfurt (2007) for a thorough review). I encourage you to try implementing
-some of these methods on your own based on this tutorial and the associated
-IPython/Jupyter notebook.
+```
+def gradients(seismic, sigma):
+    grads = []
+    for axis in range(3):
+        grad = scipy.ndimage.gaussian_filter1d(seismic, sigma, 
+	                                       axis=axis, order=1)
+        grads.append(grad[..., np.newaxis])
+    return np.concatenate(grads, axis=3)
+
+def gst_coherence_calc(region):
+    region = region.reshape(-1, 3)
+    gst = region.T.dot(region)
+    eigs = np.sort(np.linalg.eigvalsh(gst))[::-1]
+    return (eigs[0] - eigs[1]) / (eigs[0] + eigs[1])
+
+def gst_coherence(seismic, window, sigma=1):
+    grad = gradients(seismic, sigma)
+    return moving_window4d(grad_array, window, gst_coherence_calc)
+```
+
+Final Thoughts
+--------------
+
+Discontinuity attributes are a fundemental part of an interpreter's toolkit
+when working with 3D data.  While most interpreters are familiar with using
+discontinuity attributes, few are familiar with how they're implemented or the
+differences between similar attributes. Hopefully the accompanying
+IPython/Jupyter notebook and this brief tutorial help clear up some
+implementation details and inspires you to attempt new variants on well-known
+discontinuity attributes.
 
 References
 ----------
@@ -201,6 +198,8 @@ doi:10.1190/1.2213049
 
 Nova Scotia Department of Energy, 1992, Penobscot 3D Survey. Dataset accessed 19 October, 2015 at
 https://opendtect.org/osr/pmwiki.php/Main/PENOBSCOT3DSABLEISLAND
+
+Randen, T., E. Monsen, C. Singe, A. Abrahamsen, J. Hansen, T. Saeter, and J. Schlaf, 2000, Three-dimensional texture attributes for seismic data analysis, 70th Annual International Meeting, **SEG**, Expanded Abstracts, 668-671.
 
 Taner, M. T., And F. Koehler, 1969, Velocity Spectra—Digital Computer Derivation Applications of Velocity Functions: Geophysics, **34**, 859-881.
 doi:10.1190/1.1440058 
