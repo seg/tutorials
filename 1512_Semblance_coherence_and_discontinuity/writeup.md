@@ -4,18 +4,18 @@ Semblance, Coherence, and other Discontinuity Attributes
 Abstract
 --------
 
-Coherence/discontinuity calculations are some of the most commonly used
-seismic attributes.  They measure the degree of similarity between adjacent
-seismic traces. However, there are several different algorithms to calculate
-a discontinuity estimate and many more terms used to refer to those algorithms.
-As a result, it is often difficult to understand the differences between
-various similar discontinuity attributes.  While the exact discontinuity
-algorithm that any particular proprietary software package uses may be unknown,
-most are based on one of a few published methods.  Therefore, it is often
-helpful to consider simplified implementations of the most common  algorithms.
-In this tutorial and the accompanying [Jupyter/IPython
-notebook](https://github.com/seg/tutorials), we'll explore simple Python
-implementations of a few widely used discontinuity algorithms.
+Discontinuity calculations, also called coherence or semblance, are some of the
+most commonly used seismic attributes.  They measure the degree of similarity
+between adjacent seismic traces. However, there are several different types of
+discontinuity estimates and a plethora of names for similar attributes.  As a
+result, it can be difficult to understand the differences between them.  While
+the discontinuity algorithm that any particular software package uses may be
+unknown, most are based on one of a few published methods.  Understanding
+published discontinuity attributes gives insight into the trade-offs between
+different proprietary implementations. Therefore, in this tutorial and the
+accompanying [Jupyter/IPython notebook](https://github.com/seg/tutorials),
+we'll explore simplified Python implementations of a few widely used
+discontinuity algorithms.
 
 Introduction
 ------------
@@ -23,20 +23,20 @@ Introduction
 Discontinuity attributes are a variety of post-stack calculations that measure
 the degree of local similarity or dis-similarity between seismic traces.
 Discontinuities in a seismic volume, such as faults or mass transport deposits,
-are apparent as regions of low similarity.  Therefore, discontinuity
-attributes are most often applied to highlight faults in a seismic volume,
-but are also useful to detect subtle stratigraphic features in map view.
-Discontinuity attributes such as semblance-based coherence (Marfurt, et al, 1998),
-eigenstructure-based coherence (Gersztenkorn and Marfurt, 1999), and many other
-similar algorithms are among the most widely applied seismic attributes today.
+are apparent as regions of low similarity.  Therefore, discontinuity attributes
+are most often applied to highlight faults in a seismic volume, but are also
+useful to detect subtle stratigraphic features in map view.  Semblance-based
+coherence (Marfurt, et al, 1998), eigenstructure-based coherence (Gersztenkorn
+and Marfurt, 1999), and other discontinuity attributes are among the most
+widely applied seismic attributes today.
 
-However, the terminology used for discontinuity attributes in practice can be
-very confusing.  Terms such as "coherence", "semblance", "similarity",
-"discontinuity" and many others are used to refer to both the general class
-of attribute and to specific algorithms.  For these
-reasons, in this tutorial we'll use the term "discontinuity" to refer to the
-general class of attribute. Specific algorithms will always include a reference
-in addition to the name the original author used to avoid confusion.
+The terminology used for discontinuity attributes is often confusing.  Terms
+such as "coherence", "semblance", "similarity", "discontinuity" and many others
+are used to refer to both the general class of attribute and to specific
+algorithms.  For these reasons, in this tutorial we'll use the term
+"discontinuity" to refer to the general class of attribute.  Specific
+algorithms will always include a reference in addition to the name the original
+author used to avoid confusion.
 
 In practice, most discontinuity attributes are calculated and applied in
 proprietary seismic interpretation packages.  The exact algorithm used by a
@@ -145,7 +145,7 @@ first to propose this approach in their Gradient Structure Tensor (GST)
 attributes.  A number of useful attributes can be computed from the ratios of
 the eigenvalues of the structure tensor, one of which is a measure of how
 planar the data is locally, which we'll refer to as GST coherence (Randen, et
-al 2000).
+al 2000) (Figure 1E).
 
 ```
 def gradients(seismic, sigma):
@@ -167,10 +167,18 @@ def gst_coherence(seismic, window, sigma=1):
     return moving_window4d(grad_array, window, gst_coherence_calc)
 ```
 
+Because GST coherence measures changes in the local slope of the data, it is
+more closely related to curvature attributes than to the other discontinuity
+attributes we've discussed (Randen, et al, 2000; Chopra and Marfurt, 2007).
+Therefore, it can reveal different features than discontinuity attributes that
+compare waveform similarity.  However, it is more expensive to compute and
+tends to show thicker regions of low discontinuity around faults (Chopra and
+Marfurt 2007) (Figure 1E).
+
 Final Thoughts
 --------------
 
-Discontinuity attributes are a fundemental part of an interpreter's toolkit
+Discontinuity attributes are a fundamental part of an interpreter's toolkit
 when working with 3D data.  While most interpreters are familiar with using
 discontinuity attributes, few are familiar with how they're implemented or the
 differences between similar attributes. Hopefully the accompanying
