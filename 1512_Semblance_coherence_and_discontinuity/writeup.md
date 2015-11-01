@@ -26,7 +26,7 @@ Discontinuities in a seismic volume, such as faults or mass transport deposits,
 are apparent as regions of low similarity.  Therefore, discontinuity attributes
 are most often applied to highlight faults in a seismic volume, but are also
 useful to detect subtle stratigraphic features in map view.  Semblance-based
-coherence (Marfurt, et al, 1998), eigenstructure-based coherence (Gersztenkorn
+coherence (Marfurt et al., 1998), eigenstructure-based coherence (Gersztenkorn
 and Marfurt, 1999), and other discontinuity attributes are among the most
 widely applied seismic attributes today.
 
@@ -44,12 +44,12 @@ particular package is sometimes a considered a trade secret or may be
 undocumented.  For that reason, we won't directly refer to or compare
 commercially available implementations in this tutorial. However, most
 proprietary discontinuity attributes are similar to (or based on) published
-algorithms.  Therefore, understanding widely cited published algorithms for
-discontinuity is a good first step to understanding the trade-offs between
+algorithms.  Therefore, understanding widely-cited published algorithms for
+discontinuity helps understand the trade-offs between
 different commercial implementations.
 
-We'll focus on demonstrating a few of the most cited published discontinuity
-algorithms with short Python code snippets using the numpy, scipy, and
+We'll focus on demonstrating a few of the most cited discontinuity
+algorithms in the literature with short Python code snippets using the numpy, scipy, and
 matplotlib Python libraries.  The data we'll be working with is a small subset
 of the Penobscot 3D seismic dataset from offshore Nova Scotia, owned by the
 Nova Scotia Department of Energy and distributed by dGB Earth Sciences under an
@@ -62,19 +62,19 @@ expands on these examples and gives runnable versions of these short snippets.
 Early Algorithms - Cross-correlation
 ----------------
 The earliest discontinuity algorithm was developed by Bahorich and Farmer
-(1995) and used the maximum cross correlation value of three traces.  Each
+(1995) and used the maximum cross-correlation value of three traces.  Each
 trace is correlated with a "moving-window" subset of two neighboring traces
 (Figures 1B and 2B). A complete implementation is given in the accompanying
 notebook, but we'll skip it here for brevity. Bahorich and Farmer coined the
 term "coherence" for the attribute, based on its conceptual similarity to
 pre-stack methods for estimating stacking velocities (e.g. Taner and Koehler,
 1969).  While this exact approach is computationally expensive and not widely
-used today, it provides a good starting point to understand later algorithms.
+used today, it provides a starting point to understand later algorithms.
 
 Generalization to an Arbitrary Number of Traces
 -----------------------------------------------
 Bahorich and Farmer's (1995) approach was very successful, but it is
-sensitive to noise because only three traces are used. Marfurt, et al (1998)
+sensitive to noise because only three traces are used. Marfurt et al. (1998)
 generalized Bahorich and Farmer's cross-correlation approach to an arbitrary
 number of input traces, referred to by the authors as "semblance-based
 coherence" (Figure 1C). As an example:
@@ -95,7 +95,7 @@ def marfurt_semblance(region):
 result = moving_window(seismic_data, marfurt_semblance, (3, 3, 9))
 ```
 
-Conceptually, Marfurt, et al's (1998) algorithm treats each seismic trace
+Conceptually, Marfurt et al.'s (1998) algorithm treats each seismic trace
 within the moving window as a separate dimension and measures how close the
 resulting point cloud is to a hyper-plane with a slope of 1 in all directions
 and intercept of 0.  It's easiest to visualize for the case of two traces, as
@@ -105,7 +105,7 @@ the points fall to a line with a slope of 1 and intercept of 0.
 Removing Amplitude Sensitivity
 ------------------------------
 
-One caveat to both Marfurt, et al's (1998) and Bahorich and Farmer's (1995)
+One caveat to both Marfurt et al.'s (1998) and Bahorich and Farmer's (1995)
 method is that they're sensitive to lateral differences in amplitude as well as
 differences in phase.  While this is desirable for detecting stratigraphic
 features, differences due to lateral changes in amplitude can obscure subtle
@@ -131,7 +131,7 @@ result = moving_window(seismic_data, gersztenkorn_eigenstructure, (3, 3, 9))
 
 Conceptually, this is similar to treating each seismic trace within the moving
 window as a separate dimension and calculating how well the resulting point
-cloud is fit by a plane.  To contrast with Marfurt, et al's (1998)
+cloud is fit by a plane.  To contrast with Marfurt et al.'s (1998)
 method, for the case of two traces, this measures the scatter about the
 best-fit line instead of a line with a slope of 1, as shown in Figure 2D.
 
@@ -140,7 +140,7 @@ Gradient Changes Instead of Trace Similarity
 
 An entirely different approach than any we've discussed so far is to apply a
 structure tensor to seismic attributes. The structure tensor measures how the
-gradient of each dimension co-varies locally. Randen, et al (2000) were the
+gradient of each dimension co-varies locally. Randen et al. (2000) were the
 first to propose this approach in their Gradient Structure Tensor (GST)
 attributes.  A number of useful attributes can be computed from the ratios of
 the eigenvalues of the structure tensor, one of which is a measure of how
@@ -167,9 +167,9 @@ def gst_coherence(seismic, window, sigma=1):
     return moving_window4d(grad_array, window, gst_coherence_calc)
 ```
 
-Because GST coherence measures changes in the local slope of the data, it is
+Because GST coherence measures change in the local slope of the data, it is
 more closely related to curvature attributes than to the other discontinuity
-attributes we've discussed (Randen, et al, 2000; Chopra and Marfurt, 2007).
+attributes we've discussed (Randen et al., 2000; Chopra and Marfurt, 2007).
 Therefore, it can reveal different features than discontinuity attributes that
 compare waveform similarity.  However, it is more expensive to compute and
 tends to show thicker regions of low discontinuity around faults (Chopra and
@@ -182,7 +182,7 @@ Discontinuity attributes are a fundamental part of an interpreter's toolkit
 when working with 3D data.  While most interpreters are familiar with using
 discontinuity attributes, few are familiar with how they're implemented or the
 differences between similar attributes. Hopefully the accompanying
-IPython/Jupyter notebook and this brief tutorial help clear up some
+IPython/Jupyter notebook and this brief tutorial helps clear up some
 implementation details and inspires you to attempt new variants on well-known
 discontinuity attributes.
 
@@ -222,4 +222,4 @@ Figures
 
 ![Figure 2](images/figure_2.png)
 
-**Figure 2**: A visual explanation of the differences between the discontinuity algorithms discussed using only two traces.
+**Figure 2**: A visual explanation of the differences between the discontinuity algorithms discussed using only two traces. "C" indicates the calculated coherence value.
