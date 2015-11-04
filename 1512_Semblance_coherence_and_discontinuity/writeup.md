@@ -1,6 +1,6 @@
 Semblance, Coherence, and other Discontinuity Attributes
 ========================================================
-by Joe Kington, Chevron 
+by Joe Kington, Chevron <joe.kington@chevron.com>
 
 Discontinuity calculations, also called coherence or semblance, are some of the most commonly used seismic attributes. They measure the amount of similarity between adjacent seismic traces. However, there are several different types of discontinuity estimates and a plethora of names for similar attributes. As a result, it can be difficult to understand the differences between them. While the discontinuity algorithm that any particular software package uses may be unknown, most are based on one of a few published methods.  Understanding published discontinuity attributes gives insight into the trade-offs between different proprietary implementations. Therefore, in this tutorial and the accompanying [Jupyter notebook](https://github.com/seg/tutorials), we'll explore simplified Python implementations of a few widely used discontinuity algorithms.
 
@@ -35,12 +35,13 @@ def moving_window(data, func, window):
                                       window)
 
 def marfurt_semblance(region):
+  # Stack traces in 3D region into 2D array
   region = region.reshape(-1, region.shape[-1])
   ntraces, nsamples = region.shape
-  square_of_sums = np.sum(region, axis=0)**2
-  sum_of_squares = np.sum(region**2, axis=0)
-  x = sum_of_squares.sum() * ntraces
-  return square_of_sums.sum() / x
+  square_sums = np.sum(region, axis=0)**2
+  sum_squares = np.sum(region**2, axis=0)
+  c = square_sums.sum() / square_sums.sum()
+  return c / ntraces
 
 result = moving_window(seismic_data,
                        marfurt_semblance,
@@ -60,8 +61,10 @@ Eigenstructure-based coherence (Gersztenkorn and Marfurt, 1999) computes the cov
 
 ```
 def gersztenkorn(region):
+  # Stack traces in 3D region into 2D array
   region = region.reshape(-1, region.shape[-1])
 
+  # Calculate eigenvalues of covariance matrix
   cov = region.dot(region.T)
   vals = np.linalg.eigvalsh(cov)
   return vals.max() / vals.sum()
@@ -103,7 +106,7 @@ def gst_coherence(seismic, window, sigma=1):
                          gst_coherence_calc)
 ```
 
-Because GST coherence measures change in the local slope of the data, it is more closely related to curvature attributes than to the other discontinuity attributes we've discussed (Randen et al., 2000; Chopra and Marfurt, 2007). Therefore, it can reveal different features than discontinuity attributes that compare waveform similarity. However, it is more expensive to compute and tends to show thicker regions of low discontinuity around faults (Chopra and Marfurt 2007) (Figure 1E).
+Because GST coherence measures change in the local slope of the data, it is more closely related to curvature attributes than to the other discontinuity attributes we've discussed (Randen et al., 2000; Chopra and Marfurt, 2007). Therefore, it can reveal different features than discontinuity attributes that compare waveform similarity, but tends to show thicker regions of discontinuity around faults (Chopra and Marfurt 2007) (Figure 1E).
 
 
 Final Thoughts
