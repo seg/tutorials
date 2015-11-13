@@ -20,7 +20,7 @@ def run(coherence_func, title, template):
 
     for trace_func, ylabel in zip(trace_funcs, ylabels):
         filename = template.format(ylabel.replace(' ', '_'))
-        fig = compare(trace_func, figure_2.semblance, title, ylabel)
+        fig = compare(trace_func, coherence_func, title, ylabel)
         fig.savefig(image_dir(filename), bbox_inches='tight', dpi=80)
 
 def compare(trace_func, coherence_func, title, ylabel):
