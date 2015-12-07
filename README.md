@@ -48,4 +48,5 @@ These are [Jupyter Notebooks](https://jupyter.org/). They can be opened and read
 
 ## August 2015
 - [Mapping and validating lineaments](http://library.seg.org/doi/abs/10.1190/tle34080948.1), by Matteo Niccoli
+- [Mapping and validating lineaments](http://wiki.seg.org/wiki/Mapping_and_validating_lineaments) — article in SEG Wiki
 - [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1508_Mapping_and_validating_lineaments/1508_Mapping_and_validating_lineaments.ipynb)
