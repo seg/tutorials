@@ -21,7 +21,7 @@ These are [Jupyter Notebooks](https://jupyter.org/). They can be opened and read
 - [IPython Notebook](https://github.com/seg/tutorials/blob/master/1406_Make_a_synthetic/how_to_make_synthetic.ipynb)
 
 ## August 2014
-- [Evaluate and compare colormaps](http://library.seg.org/doi/abs/10.1190/tle33080910.1), by Matteo Niccoli — article in *TLE*, with low-res figures
+- [Evaluate and compare colormaps](http://library.seg.org/doi/abs/10.1190/tle33080910.1), by Matteo Niccoli — article in *TLE*, with low-res figures (resulting in incorrect colours for Figure 3a).
 - [How to evaluate and compare colormaps](http://wiki.seg.org/wiki/How_to_evaluate_and_compare_color_maps %28tutorial%29) — article in SEG Wiki, with high-res figures
 - [IPython Notebook](https://github.com/seg/tutorials/blob/master/1408_Evaluate_and_compare_colormaps/How_to_evaluate_and_compare_colormaps.ipynb)
 
