@@ -49,3 +49,15 @@ These are [Jupyter Notebooks](https://jupyter.org/). They can be opened and read
 ## August 2015
 - [Mapping and validating lineaments](http://library.seg.org/doi/abs/10.1190/tle34080948.1), by Matteo Niccoli
 - [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1508_Mapping_and_validating_lineaments/1508_Mapping_and_validating_lineaments.ipynb)
+
+## October 2015
+- [Introduction to compressed sensing](http://library.seg.org/doi/abs/10.1190/tle34101256.1) by Ben Bougher
+- [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1510_Compressed_sensing/compressed.ipynb)
+
+## December 2015
+- [Semblance, coherence, and other discontinuity attributes](http://library.seg.org/doi/10.1190/tle34121510.1) by Joe Kington
+- [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1512_Semblance_coherence_and_discontinuity/Discontinuity_tutorial.ipynb)
+
+## February 2016
+- [A user guide to the geophysical tutorials](http://library.seg.org/doi/abs/10.1190/tle35020190.1) by Matt Hall
+- [A user guide to the geophysical tutorials](http://wiki.seg.org/wiki/A_user_guide_to_the_geophysical_tutorials) &mdash; article in SEG Wiki
