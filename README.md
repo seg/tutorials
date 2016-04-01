@@ -62,3 +62,8 @@ These are [Jupyter Notebooks](https://jupyter.org/). They can be opened and read
 ## February 2016
 - [A user guide to the geophysical tutorials](http://library.seg.org/doi/abs/10.1190/tle35020190.1) by Matt Hall
 - [A user guide to the geophysical tutorials](http://wiki.seg.org/wiki/A_user_guide_to_the_geophysical_tutorials) &mdash; article in SEG Wiki
+
+## April 2016
+- [The function of interpolation](http://library.seg.org/doi/abs/10.1190/tle35040367.1) by Matt Hall
+- [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1604_Function_of_interpolation/The_function_of_interpolation.ipynb)
+
