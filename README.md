@@ -69,4 +69,4 @@ These are [Jupyter Notebooks](https://jupyter.org/). They can be opened and read
 
 ## June 2016
 - [Wavelet estimation for well ties](http://library.seg.org/doi/abs/10.1190/tle35060541.1?af=R) by Evan Bianco
-- [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1606_Wavelet_estimation/Wavelet_estimation_for_well_ties.ipynb)
+- [Jupyter Notebook](https://github.com/EvanBianco/tutorials/blob/master/1606_Wavelet_estimation/Wavelet_estimation_for_well_ties.ipynb)
