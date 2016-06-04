@@ -67,3 +67,6 @@ These are [Jupyter Notebooks](https://jupyter.org/). They can be opened and read
 - [The function of interpolation](http://library.seg.org/doi/abs/10.1190/tle35040367.1) by Matt Hall
 - [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1604_Function_of_interpolation/The_function_of_interpolation.ipynb)
 
+## June 2016
+- [Wavelet estimation for well ties](http://library.seg.org/doi/abs/10.1190/tle35060541.1?af=R) by Evan Bianco
+- [Jupyter Notebook](https://github.com/seg/tutorials/blob/master/1606_Wavelet_estimation/Wavelet_estimation_for_well_ties.ipynb)
