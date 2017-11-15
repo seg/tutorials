@@ -2,6 +2,8 @@
 
 Tutorials from [The Leading Edge](http://library.seg.org/journal/leedff) column, which started in February 2014.
 
+### [2018 tutorials](https://github.com/seg/tutorials-2018)
+
 ### [2017 tutorials](https://github.com/seg/tutorials-2017)
 
 ### [2016 tutorials](https://github.com/seg/tutorials-2016)
