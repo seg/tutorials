@@ -23,6 +23,7 @@ The tutorials will appear in The Leading Edge. It’s possible we will receive o
 
 The tutorials will also appear in SEG Wiki, retaining the author attribution. Since they will be openly licensed, it’s possible the tutorials will appear elsewhere too, but only with author attribution. 
 
+
 ### SUBJECT
 
 Anything you like. The idea is to be helpful to some reasonable number of people, especially those at the beginnings of their career or getting into a subject for the first time. Ask yourself questions like these:
@@ -36,12 +37,13 @@ Anything you like. The idea is to be helpful to some reasonable number of people
 - What are the 3–5 most important things to read next?
 - How can you illustrate a pertinent aspect of your ‘one thing to know’?
 
+
 ### FORMAT
 
 First, read some of the existing tutorials! They have the following features:
 
 - Title, author name, affiliation and contact details.
-- N0 more than 600 words for a one-pager, or 1000 for a two-pager. The absolute maximum we can accept is 2000 words.
+- NO more than 600 words for a one-pager, or 1000 for a two-pager. The absolute maximum we can accept is 2000 words.
 - Include at least one figure, two is preferable, or three for a two- or three-pager.
 - Include at least one code snippet or mini application, preferably in Python or MATLAB.
 - Use only synthetic or open data, e.g. see http://wiki.seg.org/index.php/Open_data
@@ -49,24 +51,26 @@ First, read some of the existing tutorials! They have the following features:
 - You must be prepared to release some code to illustrate your method or lesson. We can help work out the terms, but a good starting point is the Apache 2.0 license. I have set up a GitHub account for SEG code, or we may use one of SEG's existing sites to share code.
 - If you use Git and GitHub, feel free to clone the appropriate repo (look at the year) and add your files there.
 
-Please write in something we can easily tranform to MS Word (I know, sorry). For example:
+Please write in something we can easily transform to MS Word (I know, sorry). For example:
 
 - Open Office
 - Google Docs
 - Markdown
 - LaTeX is OK, but please use Authorea orOverleaf so we can easily cast to Word.
-- Word, I guess.
+
+Current best practice is to make the Jupyter Notebook into the actual manuscript. We have ways to hide code blocks and modify the input and output of blocks (using Jupyter Notebook cell 'tags'). This makes for a much smoother editing process. Please see the tutorials in 2018 to understand more about how we do this.
+
 
 ### DEADLINES
 
 | Issue  | Deadline |
 |---|---|
-| February 2018 | 15 December 2017 | 
-| April 2018 | 15 February 2018 | 
-| June 2018 | 15 April 2018 |
-| August 2018 | 15 June 2018 |
 | October 2018 | 15 August 2018 |
 | December 2018 | 15 October 2018 |
+| February 2019 | 15 December 2018 | 
+| April 2019 | 15 February 2019 | 
+| June 2019 | 15 April 2019 |
+| August 2019 | 15 June 2019 |
 
 ----
 
